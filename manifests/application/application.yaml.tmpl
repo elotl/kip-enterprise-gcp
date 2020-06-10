@@ -1,0 +1,57 @@
+apiVersion: app.k8s.io/v1beta1
+kind: Application
+metadata:
+  name: "$name"
+  namespace: "$namespace"
+  annotations:
+    kubernetes-engine.cloud.google.com/icon: >-
+      data:image/png;base64,[base64 png]
+    marketplace.cloud.google.com/deploy-info: '{"partner_id": "elotl", "product_id": "kip", "partner_name": "Elotl Inc"}'
+  labels:
+    app.kubernetes.io/name: "$name"
+spec:
+  descriptor:
+    type: Kip Enterprise
+    version: '0.1.0'
+    description: |-
+      Kip is a Virtual Kubelet provider that allows a Kubernetes cluster to transparently launch pods onto their own cloud instances.  The kip pod is run on a cluster and will create a virtual Kubernetes node in the cluster.  When a pod is scheduled onto the Virtual Kubelet, Kip starts a right-sized cloud instance for the pod’s workload and dispatches the pod onto the instance.  When the pod is finished running, the cloud instance is terminated. We call these cloud instances “cells”.
+
+      # Support
+      Community support is available on
+      [GitHub](https://github.com/elotl/kip/issues).
+      Commercial support is available to our enterprise customers
+      [contact form](https://www.elotl.co/enterprise.html).
+    maintainers:
+    - name: Elotl Inc
+      url: https://www.elotl.co/
+    links:
+    - description: Getting Started
+      url: https://github.com/elotl/kip/blob/master/README.md
+    notes: |-
+      # Verifying Kip
+
+      After installing Kip, you will see a new node appearing in your cluster:
+
+          $ kubectl get nodes -l type=virtual-kubelet
+          NAME             STATUS   ROLES   AGE   VERSION
+          kip-provider-0   Ready    agent   16h
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: "$name"
+  componentKinds:
+  - group: apps/v1
+    kind: StatefulSet
+  - group: v1
+    kind: PersistentVolumeClaim
+  - group: v1
+    kind: Secret
+  - group: v1
+    kind: Service
+  - group: v1
+    kind: ServiceAccount
+  - group: v1
+    kind: ClusterRole
+  - group: v1
+    kind: ClusterRoleBinding
+  - group: v1
+    kind: ConfigMap

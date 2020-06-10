@@ -1,0 +1,32 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+bases:
+- github.com/elotl/kip/deploy/manifests/kip/base?ref=vilmos-kustomize-naming
+namespace: ${namespace}
+namePrefix: ${name}-
+patchesJson6902:
+- target:
+    group: apps
+    version: v1
+    kind: StatefulSet
+    name: provider
+  path: add-ubbagent.yaml
+images:
+- name: elotl/kip
+  newName: ${imageKipProviderRepo}
+  newTag: ${imageKipProviderTag}
+- name: elotl/init-cert
+  newName: ${imageInitCertRepo}
+  newTag: ${imageInitCertTag}
+- name: k8s.gcr.io/kube-proxy
+  newName: ${imageKubeProxyRepo}
+  newTag: ${imageKubeProxyTag}
+- name: gcr.io/elotl-kip/image-cache-controller
+  newName: ${imageImageCacheControllerRepo}
+  newTag: ${imageImageCacheControllerTag}
+configMapGenerator:
+- name: ubbagent-config
+  files:
+  - ubbagent-config.yaml
+  literals:
+  - REPORTING_SECRET=${reportingSecret}
