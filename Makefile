@@ -1,19 +1,23 @@
 TAG ?= latest
+ELOTL_KIP_TAG ?= v0.0.6
+ELOTL_INIT_CERT_TAG ?= latest
+KUBE_PROXY_TAG ?= v1.18.3
+UBB_AGENT_TAG ?= latest
 
 include gcloud.Makefile
 include var.Makefile
 
-APP_DEPLOYER_IMAGE ?= $(REGISTRY)/elotl-public/kip/deployer:$(TAG)
+APP_DEPLOYER_IMAGE ?= $(REGISTRY)/deployer:$(TAG)
 APP_PARAMETERS ?= { \
   "name": "$(NAME)", \
   "namespace": "$(NAMESPACE)", \
-  "imageKipProvider": "$(REGISTRY)/elotl-public/kip:$(TAG)", \
-  "imageInitCert": "$(REGISTRY)/elotl-public/kip/init-cert:$(TAG)", \
-  "imageKubeProxy": "$(REGISTRY)/elotl-public/kip/kube-proxy:$(TAG)", \
-  "imageUbbagent": "$(REGISTRY)/elotl-public/kip/ubbagent:$(TAG)", \
+  "imageKipProvider": "$(REGISTRY):$(TAG)", \
+  "imageInitCert": "$(REGISTRY)/init-cert:$(TAG)", \
+  "imageKubeProxy": "$(REGISTRY)/kube-proxy:$(TAG)", \
+  "imageUbbagent": "$(REGISTRY)/ubbagent:$(TAG)", \
   "reportingSecret": "$(REPORTING_SECRET)" \
 }
-TESTER_IMAGE ?= $(REGISTRY)/elotl-public/kip/tester:$(TAG)
+TESTER_IMAGE ?= $(REGISTRY)/tester:$(TAG)
 APP_TEST_PARAMETERS ?= { \
   "imageTester": "$(TESTER_IMAGE)" \
 }
@@ -22,16 +26,16 @@ APP_TEST_PARAMETERS ?= { \
 # included after.
 include app.Makefile
 
-app/build:: .build/elotl-public/deployer \
-            .build/elotl-public/kip \
+app/build:: .build/elotl-public/kip \
+            .build/elotl-public/kip/deployer \
             .build/elotl-public/kip/init-cert \
             .build/elotl-public/kip/kube-proxy \
             .build/elotl-public/kip/ubbagent
 
-.build/elotl-public: | .build
+.build/kip: | .build
 	mkdir -p "$@"
 
-.build/elotl-public/deployer: .build/var/APP_DEPLOYER_IMAGE \
+.build/kip/deployer: .build/var/APP_DEPLOYER_IMAGE \
                            .build/var/MARKETPLACE_TOOLS_TAG \
                            .build/var/REGISTRY \
                            .build/var/TAG \
@@ -40,10 +44,10 @@ app/build:: .build/elotl-public/deployer \
                            deployer/* \
                            manifests/* \
                            schema.yaml \
-                           | .build/elotl-public
+                           | .build/kip
 	$(call print_target, $@)
 	docker build \
-	    --build-arg REGISTRY="$(REGISTRY)/elotl-public/kip" \
+	    --build-arg REGISTRY="$(REGISTRY)" \
 	    --build-arg TAG="$(TAG)" \
 	    --build-arg MARKETPLACE_TOOLS_TAG="$(MARKETPLACE_TOOLS_TAG)" \
 	    --tag "$(APP_DEPLOYER_IMAGE)" \
@@ -52,7 +56,7 @@ app/build:: .build/elotl-public/deployer \
 	docker push "$(APP_DEPLOYER_IMAGE)"
 	@touch "$@"
 
-.build/elotl-public/tester: .build/var/TESTER_IMAGE
+.build/kip/tester: .build/var/TESTER_IMAGE
 	$(call print_target, $@)
 	docker pull cosmintitei/bash-curl
 	docker tag cosmintitei/bash-curl "$(TESTER_IMAGE)"
@@ -60,42 +64,42 @@ app/build:: .build/elotl-public/deployer \
 	@touch "$@"
 
 # Primary app image, copying public image to local registry.
-.build/elotl-public/kip: .build/var/REGISTRY \
+.build/kip/kip: .build/var/REGISTRY \
                             .build/var/TAG \
-                            | .build/elotl-public
+                            | .build/kip
 	$(call print_target, $@)
-	docker pull elotl/kip
-	docker tag elotl/kip "$(REGISTRY)/elotl-public/kip:$(TAG)"
-	docker push "$(REGISTRY)/elotl-public/kip:$(TAG)"
+	docker pull elotl/kip:$(ELOTL_KIP_TAG)
+	docker tag elotl/kip:$(ELOTL_KIP_TAG) "$(REGISTRY):$(TAG)"
+	docker push "$(REGISTRY):$(TAG)"
 	@touch "$@"
 
 # Init container image init-cert.
-.build/elotl-public/init-cert: init/* \
-                       .build/var/REGISTRY \
+.build/kip/init-cert: .build/var/REGISTRY \
                        .build/var/TAG \
-                       | .build/elotl-public
+                       | .build/kip
 	$(call print_target, $@)
-	docker pull elotl/init-cert
-	docker tag elotl/init-cert "$(REGISTRY)/elotl-public/init-cert:$(TAG)"
-	docker push "$(REGISTRY)/elotl-public/init-cert:$(TAG)"
+	docker pull elotl/init-cert:$(ELOTL_INIT_CERT_TAG)
+	docker tag elotl/init-cert:$(ELOTL_INIT_CERT_TAG) "$(REGISTRY)/init-cert:$(TAG)"
+	docker push "$(REGISTRY)/init-cert:$(TAG)"
 	@touch "$@"
 
 # Copy kube-proxy image to $REGISTRY.
-.build/elotl-public/mysql: .build/var/REGISTRY \
+.build/kip/kube-proxy: .build/var/REGISTRY \
                         .build/var/TAG \
-                        | .build/elotl-public
+                        | .build/kip
 	$(call print_target, $@)
-	docker pull k8s.gcr.io/kube-proxy:v1.18.3
-	docker tag k8s.gcr.io/kube-proxy:v1.18.3 "$(REGISTRY)/elotl-public/kube-proxy:$(TAG)"
-	docker push "$(REGISTRY)/elotl-public/init-cert:$(TAG)"
+	docker pull k8s.gcr.io/kube-proxy:$(KUBE_PROXY_TAG)
+	docker tag k8s.gcr.io/kube-proxy:$(KUBE_PROXY_TAG) "$(REGISTRY)/kube-proxy:$(TAG)"
+	docker push "$(REGISTRY)/init-cert:$(TAG)"
 	@touch "$@"
 
 # Copy ubbagent image to $REGISTRY.
-.build/elotl-public/ubbagent: .build/var/REGISTRY \
+.build/kip/ubbagent: .build/var/REGISTRY \
                            .build/var/TAG \
-                           | .build/elotl-public
+                           | .build/kip
 	$(call print_target, $@)
-	docker pull "gcr.io/cloud-marketplace-tools/metering/ubbagent"
-	docker tag "gcr.io/cloud-marketplace-tools/metering/ubbagent" "$(REGISTRY)/elotl-public/elotl-public/ubbagent:$(TAG)"
-	docker push "$(REGISTRY)/elotl-public/elotl-public/ubbagent:$(TAG)"
+	docker pull gcr.io/cloud-marketplace-tools/metering/ubbagent:$(UBB_AGENT_TAG)
+	docker tag gcr.io/cloud-marketplace-tools/metering/ubbagent:$(UBB_AGENT_TAG) \
+		"$(REGISTRY)/ubbagent:$(TAG)"
+	docker push "$(REGISTRY)/ubbagent:$(TAG)"
 	@touch "$@"
