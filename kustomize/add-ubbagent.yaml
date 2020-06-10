@@ -20,7 +20,7 @@
           key: consumer-id
     - name: REPORTING_SECRET
       valueFrom:
-        configMap:
+        configMapKeyRef:
           name: ubbagent-config
           key: REPORTING_SECRET
     volumeMounts:
