@@ -40,9 +40,9 @@ app/build:: .build/elotl-public/kip \
                            .build/var/REGISTRY \
                            .build/var/TAG \
                            apptest/deployer/* \
-                           apptest/deployer/manifests/* \
+                           apptest/deployer/manifest/* \
                            deployer/* \
-                           manifests/* \
+                           manifest/* \
                            schema.yaml \
                            | .build/kip
 	$(call print_target, $@)

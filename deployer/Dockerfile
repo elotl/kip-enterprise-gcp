@@ -21,7 +21,7 @@ FROM gcr.io/cloud-marketplace-tools/k8s/deployer_envsubst:$MARKETPLACE_TOOLS_TAG
 
 COPY --from=build /usr/local/bin/kustomize /usr/local/bin/
 
-COPY manifests /data/manifests
+COPY manifest /data/manifest
 COPY apptest/deployer /data-test/
 COPY --from=build /tmp/schema.yaml /data/
 
