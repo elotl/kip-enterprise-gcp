@@ -81,7 +81,8 @@ app/install:: app/build \
 	.build/app/dev install \
 	    --deployer='$(APP_DEPLOYER_IMAGE)' \
 	    --parameters='$(APP_PARAMETERS)' \
-	    --entrypoint="/bin/deploy.sh"
+	    --entrypoint="/bin/deploy.sh" \
+		$(APP_EXTRA_OPTIONS)
 
 
 # Installs the application into target namespace on the cluster.
@@ -96,7 +97,8 @@ app/install-test:: app/build \
 	.build/app/dev install \
 	    --deployer='$(APP_DEPLOYER_IMAGE)' \
 	    --parameters='$(call combined_parameters)' \
-	    --entrypoint="/bin/deploy_with_tests.sh"
+	    --entrypoint="/bin/deploy_with_tests.sh" \
+		$(APP_EXTRA_OPTIONS)
 
 
 # Uninstalls the application from the target namespace on the cluster.
@@ -120,7 +122,8 @@ app/verify: app/build \
 	$(call print_target)
 	.build/app/dev verify \
 	    --deployer='$(APP_DEPLOYER_IMAGE)' \
-	    --parameters='$(call combined_parameters)'
+	    --parameters='$(call combined_parameters)' \
+		$(APP_EXTRA_OPTIONS)
 
 
 # Runs diagnostic tool to make sure your environment is properly setup.

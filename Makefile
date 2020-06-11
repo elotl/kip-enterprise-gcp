@@ -21,6 +21,7 @@ TESTER_IMAGE ?= $(REGISTRY)/tester:$(TAG)
 APP_TEST_PARAMETERS ?= { \
   "imageTester": "$(TESTER_IMAGE)" \
 }
+APP_EXTRA_OPTIONS ?= ""
 
 # app.Makefile requires several APP_* variables defined above, and thus must be
 # included after.
