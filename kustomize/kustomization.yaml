@@ -11,6 +11,11 @@ patchesJson6902:
     kind: StatefulSet
     name: provider
   path: add-ubbagent.yaml
+- target:
+    version: v1
+    kind: Secret
+    name: network-agent
+  path: patch-network-agent-secret.yaml
 images:
 - name: elotl/kip
   newName: ${imageKipProviderRepo}
