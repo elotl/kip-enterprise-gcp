@@ -26,11 +26,11 @@ APP_TEST_PARAMETERS ?= { \
 # included after.
 include app.Makefile
 
-app/build:: .build/elotl-public/kip \
-            .build/elotl-public/kip/deployer \
-            .build/elotl-public/kip/init-cert \
-            .build/elotl-public/kip/kube-proxy \
-            .build/elotl-public/kip/ubbagent
+app/build:: .build/kip/kip \
+            .build/kip/deployer \
+            .build/kip/init-cert \
+            .build/kip/kube-proxy \
+            .build/kip/ubbagent
 
 .build/kip: | .build
 	mkdir -p "$@"
