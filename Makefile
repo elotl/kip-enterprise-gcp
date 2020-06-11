@@ -1,5 +1,6 @@
 TAG ?= latest
 ELOTL_KIP_TAG ?= v0.0.6
+ELOTL_DEBUG_TAG ?= latest
 ELOTL_INIT_CERT_TAG ?= latest
 KUBE_PROXY_TAG ?= v1.18.3
 UBB_AGENT_TAG ?= latest
@@ -59,10 +60,11 @@ app/build:: .build/kip/kip \
 	docker push "$(APP_DEPLOYER_IMAGE)"
 	@touch "$@"
 
+# Tester image.
 .build/kip/tester: .build/var/TESTER_IMAGE
 	$(call print_target, $@)
-	docker pull cosmintitei/bash-curl
-	docker tag cosmintitei/bash-curl "$(TESTER_IMAGE)"
+	docker pull elotl/debug:$(ELOTL_DEBUG_TAG)
+	docker tag elotl/debug:$(ELOTL_DEBUG_TAG) "$(TESTER_IMAGE)"
 	docker push "$(TESTER_IMAGE)"
 	@touch "$@"
 
