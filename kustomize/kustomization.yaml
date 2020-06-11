@@ -16,6 +16,11 @@ patchesJson6902:
     kind: Secret
     name: network-agent
   path: patch-network-agent-secret.yaml
+- target:
+    version: v1
+    kind: PersistentVolumeClaim
+    name: provider-data
+  path: patch-provider-persistent-volume-claim.yaml
 images:
 - name: elotl/kip
   newName: ${imageKipProviderRepo}
