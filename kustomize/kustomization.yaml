@@ -10,7 +10,7 @@ patchesJson6902:
     version: v1
     kind: StatefulSet
     name: provider
-  path: add-ubbagent.yaml
+  path: patch-provider-statefulset.yaml
 - target:
     version: v1
     kind: Secret
@@ -33,5 +33,3 @@ configMapGenerator:
 - name: ubbagent-config
   files:
   - ubbagent-config.yaml
-  literals:
-  - REPORTING_SECRET=${reportingSecret}

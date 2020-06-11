@@ -11,18 +11,13 @@
     - name: AGENT_ENCODED_KEY
       valueFrom:
         secretKeyRef:
-          name: $(REPORTING_SECRET)
+          name: ${reportingSecret}
           key: reporting-key
     - name: AGENT_CONSUMER_ID
       valueFrom:
         secretKeyRef:
-          name: $(REPORTING_SECRET)
+          name: ${reportingSecret}
           key: consumer-id
-    - name: REPORTING_SECRET
-      valueFrom:
-        configMapKeyRef:
-          name: ubbagent-config
-          key: REPORTING_SECRET
     volumeMounts:
     - name: ubbagent-config
       mountPath: /etc/ubbagent
@@ -35,3 +30,6 @@
       items:
       - key: ubbagent-config.yaml
         path: config.yaml
+- op: replace
+  path: /spec/template/spec/serviceAccountName
+  value: ${kipServiceAccountName}
