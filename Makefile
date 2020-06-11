@@ -90,7 +90,7 @@ app/build:: .build/kip/kip \
 	$(call print_target, $@)
 	docker pull k8s.gcr.io/kube-proxy:$(KUBE_PROXY_TAG)
 	docker tag k8s.gcr.io/kube-proxy:$(KUBE_PROXY_TAG) "$(REGISTRY)/kube-proxy:$(TAG)"
-	docker push "$(REGISTRY)/init-cert:$(TAG)"
+	docker push "$(REGISTRY)/kube-proxy:$(TAG)"
 	@touch "$@"
 
 # Copy ubbagent image to $REGISTRY.
