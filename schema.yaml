@@ -87,6 +87,263 @@ properties:
     type: boolean
     x-google-marketplace:
       type: INGRESS_AVAILABLE
+  kipServiceAccountName:
+    type: string
+    title: Service account used by Kip
+    x-google-marketplace:
+      type: SERVICE_ACCOUNT
+      serviceAccount:
+        roles:
+        - type: ClusterRole
+          rulesType: CUSTOM
+          rules:
+            - apiGroups:
+              - authentication.k8s.io
+              resources:
+                - tokenreviews
+              verbs:
+                - create
+            - apiGroups:
+              - authorization.k8s.io
+              resources:
+                - localsubjectaccessreviews
+                - subjectaccessreviews
+              verbs:
+                - create
+            - apiGroups:
+              - ""
+              resources:
+                - services
+              verbs:
+                - get
+                - list
+                - watch
+            - apiGroups:
+              - ""
+              resources:
+                - nodes
+              verbs:
+                - create
+                - get
+                - list
+                - watch
+            - apiGroups:
+              - ""
+              resources:
+                - nodes/status
+              verbs:
+                - patch
+                - update
+            - apiGroups:
+              - ""
+              resources:
+                - nodes
+              verbs:
+                - patch
+                - update
+            - apiGroups:
+              - ""
+              resources:
+                - events
+              verbs:
+                - create
+                - patch
+                - update
+            - apiGroups:
+              - ""
+              resources:
+                - pods
+              verbs:
+                - get
+                - list
+                - watch
+            - apiGroups:
+              - ""
+              resources:
+                - pods
+              verbs:
+                - create
+                - delete
+            - apiGroups:
+              - ""
+              resources:
+                - pods/status
+              verbs:
+                - patch
+                - update
+            - apiGroups:
+              - ""
+              resources:
+                - pods/eviction
+              verbs:
+                - create
+            - apiGroups:
+              - ""
+              resources:
+                - configmaps
+                - secrets
+              verbs:
+                - get
+                - list
+                - watch
+            - apiGroups:
+              - ""
+              resources:
+                - persistentvolumeclaims
+                - persistentvolumes
+              verbs:
+                - get
+            - apiGroups:
+              - ""
+              resources:
+                - endpoints
+              verbs:
+                - get
+                - list
+                - watch
+            - apiGroups:
+              - certificates.k8s.io
+              resourceNames:
+                - kubernetes.io/kubelet-serving
+              resources:
+                - signers
+              verbs:
+                - approve
+            - apiGroups:
+              - certificates.k8s.io
+              resources:
+                - certificatesigningrequests
+              verbs:
+                - create
+                - get
+                - list
+                - watch
+            - apiGroups:
+              - certificates.k8s.io
+              resources:
+                - certificatesigningrequests/approval
+              verbs:
+                - update
+            - apiGroups:
+              - coordination.k8s.io
+              resources:
+                - leases
+              verbs:
+                - create
+                - delete
+                - get
+                - patch
+                - update
+            - apiGroups:
+              - storage.k8s.io
+              resources:
+                - volumeattachments
+              verbs:
+                - get
+            - apiGroups:
+              - ""
+              resources:
+                - persistentvolumeclaims/status
+              verbs:
+                - get
+                - patch
+                - update
+            - apiGroups:
+              - ""
+              resources:
+                - serviceaccounts/token
+              verbs:
+                - create
+            - apiGroups:
+              - storage.k8s.io
+              resources:
+                - csidrivers
+              verbs:
+                - get
+                - list
+                - watch
+            - apiGroups:
+              - storage.k8s.io
+              resources:
+                - csinodes
+              verbs:
+                - create
+                - delete
+                - get
+                - patch
+                - update
+            - apiGroups:
+              - node.k8s.io
+              resources:
+                - runtimeclasses
+              verbs:
+                - get
+                - list
+                - watch
+            - apiGroups:
+              - kip.elotl.co
+              resources:
+                - cells
+              verbs:
+                - get
+                - list
+                - watch
+                - create
+                - delete
+                - deletecollection
+                - patch
+                - update
+            - apiGroups:
+              - apiextensions.k8s.io
+              resources:
+                - customresourcedefinitions
+              verbs:
+                - get
+                - list
+                - watch
+                - create
+                - delete
+                - deletecollection
+                - patch
+                - update
+  kipNetworkAgentServiceAccountName:
+    type: string
+    title: Service account used by Kip Network Agent
+    x-google-marketplace:
+      type: SERVICE_ACCOUNT
+      serviceAccount:
+        roles:
+        - type: ClusterRole
+          rulesType: CUSTOM
+          rules:
+            - apiGroups:
+              - ""
+              resources:
+                - namespaces
+                - pods
+                - services
+                - nodes
+                - endpoints
+              verbs:
+                - list
+                - get
+                - watch
+            - apiGroups:
+              - "networking.k8s.io"
+              resources:
+                - networkpolicies
+              verbs:
+                - list
+                - get
+                - watch
+            - apiGroups:
+              - extensions
+              resources:
+                - networkpolicies
+              verbs:
+                - get
+                - list
+                - watch
 required:
 - name
 - namespace
