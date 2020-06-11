@@ -23,10 +23,7 @@ RUN rm -f \
         /tmp/kustomize-output/*_clusterrole_* \
         /tmp/kustomize-output/*_clusterrolebinding_* \
         /tmp/kustomize-output/*_serviceaccount_*
-RUN bash -c \
-        "cd /tmp/kustomize-output/ && \
-        find . -type f -exec detox '{}' \; && \
-        ls -l"
+RUN find /tmp/kustomize-output/ -type f -exec detox '{}' \;
 
 
 FROM gcr.io/cloud-marketplace-tools/k8s/deployer_envsubst:$MARKETPLACE_TOOLS_TAG
