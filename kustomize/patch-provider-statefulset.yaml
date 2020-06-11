@@ -1,3 +1,17 @@
+- op: replace
+  path: /spec/template/spec/containers/0/command
+  value:
+  - /kip
+  - --provider
+  - kip
+  - --provider-config
+  - /etc/kip/provider.yaml
+  - --network-agent-secret
+  - $(KIP_NAMESPACE)/$(NETWORK_AGENT_SERVICE_ACCOUNT)
+  - --klog.logtostderr
+  - --klog.v=2
+  - --metrics-addr=:10255
+  - --nodename=$(VKUBELET_NODE_NAME)
 - op: add
   path: /spec/template/spec/containers/-
   value:

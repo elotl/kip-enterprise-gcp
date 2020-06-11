@@ -16,6 +16,10 @@ spec:
     spec:
       nodeSelector:
         type: virtual-kubelet
+      tolerations:
+      - key: virtual-kubelet.io/provider
+        effect: NoSchedule
+        operator: Exists
       containers:
       - image: ${imageImageCacheController}
         imagePullPolicy: IfNotPresent
