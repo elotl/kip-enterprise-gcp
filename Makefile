@@ -35,7 +35,8 @@ app/build:: .build/kip/deployer \
 			.build/kip/kip \
             .build/kip/kube-proxy \
             .build/kip/ubbagent \
-            .build/kip/image-cache-controller
+            .build/kip/image-cache-controller \
+            .build/kip/tester \
 
 .build/kip: | .build
 	mkdir -p "$@"
