@@ -42,6 +42,7 @@ app/build:: .build/kip/kip \
                            apptest/deployer/* \
                            apptest/deployer/manifest/* \
                            deployer/* \
+                           kustomize/* \
                            manifest/* \
                            schema.yaml \
                            | .build/kip

@@ -1,0 +1,28 @@
+apiVersion: v1
+cloud:
+  gce: {}
+etcd:
+  internal:
+    dataDir: /opt/kip/data
+cells:
+  privateIPOnly: true
+  bootImageSpec:
+    project: elotl-kip
+    image: elotl-kip-latest
+  defaultVolumeSize: "10G"
+  defaultInstanceType: e2-small
+  nametag: ${name}
+  itzo:
+    url: https://storage.googleapis.com/itzo-kip-download
+    version: latest
+  extraCIDRs: []
+  cellConfig:
+    imageCacheEndpoint: 10.120.0.2:/data
+kubelet:
+  capacity:
+    cpu: "100"
+    memory: "512Gi"
+    pods: "200"
+    nvidia.com/gpu: "50"
+  labels:
+    node.elotl.co/gpu-nvidia-tesla-t4: ""

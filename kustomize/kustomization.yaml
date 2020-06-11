@@ -38,6 +38,10 @@ images:
   newName: ${imageUbbAgentRepo}
   newTag: ${imageUbbAgentTag}
 configMapGenerator:
+- name: config
+  files:
+  - provider.yaml
+  behavior: merge
 - name: ubbagent-config
   files:
   - ubbagent-config.yaml
