@@ -34,6 +34,9 @@ images:
 - name: gcr.io/elotl-kip/image-cache-controller
   newName: ${imageImageCacheControllerRepo}
   newTag: ${imageImageCacheControllerTag}
+- name: elotl/ubbagent
+  newName: ${imageUbbAgentRepo}
+  newTag: ${imageUbbAgentTag}
 configMapGenerator:
 - name: ubbagent-config
   files:
