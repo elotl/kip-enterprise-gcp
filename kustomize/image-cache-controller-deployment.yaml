@@ -5,6 +5,7 @@ metadata:
     app: image-cache-controller
   name: cache
 spec:
+  replicas: ${imageCacheControllerReplicas}
   selector:
     matchLabels:
       app: image-cache-controller

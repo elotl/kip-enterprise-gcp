@@ -101,10 +101,17 @@ properties:
     default: "2Gi"
     description: Kip state storage size
     pattern: '^[1-9][0-9]*(\.[0-9]+)?[TGM]i?$'
+  imageCacheControllerReplicas:
+    type: integer
+    default: 1
+    minimum: 0
+    maximum: 1
+    description: Number of replicas to start for the image cache controller. Set it to 0 to disable image caching.
   nfsVolumeEndpoint:
     type: string
+    default: ""
     title: File Storage or NFS volume endpoint
-    description: A File Storage volume endpoint that will be used for caching container images for Kip cells. For example, '10.120.0.20:/data'
+    description: A File Storage volume endpoint that will be used for caching container images for Kip cells. For example, '10.120.0.20:/data'. Leave it empty if you disabled image caching.
   imageCacheControllerServiceAccountName:
     type: string
     title: Service account used by Kip
