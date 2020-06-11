@@ -1,6 +1,5 @@
 TAG ?= latest
 ELOTL_KIP_TAG ?= v0.0.6
-ELOTL_DEBUG_TAG ?= latest
 ELOTL_INIT_CERT_TAG ?= latest
 ELOTL_IMAGE_CACHE_CONTROLLER_TAG ?= latest
 KUBE_PROXY_TAG ?= v1.18.3
@@ -20,7 +19,7 @@ APP_PARAMETERS ?= { \
   "imageUbbagent": "$(REGISTRY)/ubbagent:$(TAG)", \
   "reportingSecret": "$(REPORTING_SECRET)" \
 }
-TESTER_IMAGE ?= $(REGISTRY)/tester:$(TAG)
+TESTER_IMAGE ?= elotl/debug:latest
 APP_TEST_PARAMETERS ?= { \
   "imageTester": "$(TESTER_IMAGE)" \
 }
@@ -35,8 +34,7 @@ app/build:: .build/kip/deployer \
 			.build/kip/kip \
             .build/kip/kube-proxy \
             .build/kip/ubbagent \
-            .build/kip/image-cache-controller \
-            .build/kip/tester \
+            .build/kip/image-cache-controller
 
 .build/kip: | .build
 	mkdir -p "$@"
@@ -61,14 +59,6 @@ app/build:: .build/kip/deployer \
 	    -f deployer/Dockerfile \
 	    .
 	docker push "$(APP_DEPLOYER_IMAGE)"
-	@touch "$@"
-
-# Tester image.
-.build/kip/tester: .build/var/TESTER_IMAGE
-	$(call print_target, $@)
-	docker pull elotl/debug:$(ELOTL_DEBUG_TAG)
-	docker tag elotl/debug:$(ELOTL_DEBUG_TAG) "$(TESTER_IMAGE)"
-	docker push "$(TESTER_IMAGE)"
 	@touch "$@"
 
 # Primary app image, copying public image to local registry.

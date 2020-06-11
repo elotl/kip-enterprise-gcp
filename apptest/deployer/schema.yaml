@@ -1,6 +1,6 @@
 properties:
   imageTester:
     type: string
-    default: $REGISTRY/tester:$TAG
+    default: elotl/debug:latest
     x-google-property:
       type: IMAGE
