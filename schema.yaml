@@ -67,14 +67,7 @@ properties:
     type: integer
     default: 1
     minimum: 1
-    maximum: 64
-  googleApplicationCredentials:
-    title: GCE service account JSON
-    description: A GCE service account JSON that Kip will use to run API requests to create cloud instances in GCE. By default, Kip will use the https://www.googleapis.com/auth/monitoring scope from the VM instance where it runs, so no GCE service account needs to be configured.
-    type: string
-    default: ""
-    x-google-marketplace:
-      type: MASKED_FIELD
+    maximum: 16
   reportingSecret:
     type: string
     x-google-marketplace:
