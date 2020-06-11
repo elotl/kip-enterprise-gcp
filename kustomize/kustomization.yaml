@@ -6,6 +6,8 @@ namespace: ${namespace}
 namePrefix: ${name}-
 resources:
 - image-cache-controller-deployment.yaml
+commonLabels:
+  app.kubernetes.io/name: ${name}
 patchesJson6902:
 - target:
     group: apps
