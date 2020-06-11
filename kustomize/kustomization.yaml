@@ -4,6 +4,8 @@ bases:
 - github.com/elotl/kip/deploy/manifests/kip/base?ref=vilmos-kustomize-naming
 namespace: ${namespace}
 namePrefix: ${name}-
+resources:
+- image-cache-controller-deployment.yaml
 patchesJson6902:
 - target:
     group: apps

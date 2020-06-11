@@ -17,7 +17,8 @@ APP_PARAMETERS ?= { \
   "imageInitCert": "$(REGISTRY)/init-cert:$(TAG)", \
   "imageKubeProxy": "$(REGISTRY)/kube-proxy:$(TAG)", \
   "imageUbbagent": "$(REGISTRY)/ubbagent:$(TAG)", \
-  "reportingSecret": "$(REPORTING_SECRET)" \
+  "reportingSecret": "$(REPORTING_SECRET)", \
+  "nfsVolumeEndpoint": "$(NFS_VOLUME_ENDPOINT)" \
 }
 TESTER_IMAGE ?= elotl/debug:latest
 APP_TEST_PARAMETERS ?= { \

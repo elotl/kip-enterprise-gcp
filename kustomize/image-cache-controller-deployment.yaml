@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: image-cache-controller
+  name: cache
+spec:
+  selector:
+    matchLabels:
+      app: image-cache-controller
+  template:
+    metadata:
+      labels:
+        app: image-cache-controller
+    spec:
+      nodeSelector:
+        type: virtual-kubelet
+      containers:
+      - image: ${imageImageCacheController}
+        imagePullPolicy: IfNotPresent
+        name: image-cache-controller
+        env:
+        - name: CACHE_DIR
+          value: /var/cache/images
+        - name: NFS_ENDPOINT
+          value: ${nfsVolumeEndpoint}
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      serviceAccount: ${imageCacheControllerServiceAccountName}
