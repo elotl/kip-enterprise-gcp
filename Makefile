@@ -2,6 +2,7 @@ TAG ?= latest
 ELOTL_KIP_TAG ?= v0.0.6
 ELOTL_DEBUG_TAG ?= latest
 ELOTL_INIT_CERT_TAG ?= latest
+ELOTL_IMAGE_CACHE_CONTROLLER_TAG ?= latest
 KUBE_PROXY_TAG ?= v1.18.3
 UBB_AGENT_TAG ?= latest
 
@@ -29,11 +30,12 @@ APP_EXTRA_OPTIONS ?= ""
 # included after.
 include app.Makefile
 
-app/build:: .build/kip/kip \
-            .build/kip/deployer \
+app/build:: .build/kip/deployer \
             .build/kip/init-cert \
+			.build/kip/kip \
             .build/kip/kube-proxy \
-            .build/kip/ubbagent
+            .build/kip/ubbagent \
+            .build/kip/image-cache-controller
 
 .build/kip: | .build
 	mkdir -p "$@"
@@ -107,4 +109,15 @@ app/build:: .build/kip/kip \
 	docker tag gcr.io/cloud-marketplace-tools/metering/ubbagent:$(UBB_AGENT_TAG) \
 		"$(REGISTRY)/ubbagent:$(TAG)"
 	docker push "$(REGISTRY)/ubbagent:$(TAG)"
+	@touch "$@"
+
+# Copy image-cache-controller image to $REGISTRY.
+.build/kip/image-cache-controller: .build/var/REGISTRY \
+                           .build/var/TAG \
+                           | .build/kip
+	$(call print_target, $@)
+	docker pull gcr.io/elotl-kip/image-cache-controller:$(ELOTL_IMAGE_CACHE_CONTROLLER_TAG)
+	docker tag gcr.io/elotl-kip/image-cache-controller:$(ELOTL_IMAGE_CACHE_CONTROLLER_TAG) \
+		"$(REGISTRY)/image-cache-controller:$(TAG)"
+	docker push "$(REGISTRY)/image-cache-controller:$(TAG)"
 	@touch "$@"
