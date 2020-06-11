@@ -9,7 +9,7 @@ UBB_AGENT_TAG ?= latest
 include gcloud.Makefile
 include var.Makefile
 
-REPORTING_SECRET ?= "gs://cloud-marketplace-tools/reporting_secrets/fake_reporting_secret.yaml"
+REPORTING_SECRET ?= gs://cloud-marketplace-tools/reporting_secrets/fake_reporting_secret.yaml
 APP_DEPLOYER_IMAGE ?= $(REGISTRY)/deployer:$(TAG)
 APP_PARAMETERS ?= { \
   "name": "$(NAME)", \
