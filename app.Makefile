@@ -82,7 +82,7 @@ app/install:: app/build \
 	    --deployer='$(APP_DEPLOYER_IMAGE)' \
 	    --parameters='$(APP_PARAMETERS)' \
 	    --entrypoint="/bin/deploy.sh" \
-		$(APP_EXTRA_OPTIONS)
+		--image_pull_secret=$(IMAGE_PULL_SECRET)
 
 
 # Installs the application into target namespace on the cluster.
@@ -98,7 +98,7 @@ app/install-test:: app/build \
 	    --deployer='$(APP_DEPLOYER_IMAGE)' \
 	    --parameters='$(call combined_parameters)' \
 	    --entrypoint="/bin/deploy_with_tests.sh" \
-		$(APP_EXTRA_OPTIONS)
+		--image_pull_secret=$(IMAGE_PULL_SECRET)
 
 
 # Uninstalls the application from the target namespace on the cluster.
@@ -123,7 +123,7 @@ app/verify: app/build \
 	.build/app/dev verify \
 	    --deployer='$(APP_DEPLOYER_IMAGE)' \
 	    --parameters='$(call combined_parameters)' \
-		$(APP_EXTRA_OPTIONS)
+		--image_pull_secret=$(IMAGE_PULL_SECRET)
 
 
 # Runs diagnostic tool to make sure your environment is properly setup.

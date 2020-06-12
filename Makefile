@@ -26,7 +26,7 @@ TESTER_IMAGE ?= elotl/debug:latest
 APP_TEST_PARAMETERS ?= { \
   "imageTester": "$(TESTER_IMAGE)" \
 }
-APP_EXTRA_OPTIONS ?= ""
+IMAGE_PULL_SECRET ?= ""
 
 # app.Makefile requires several APP_* variables defined above, and thus must be
 # included after.
