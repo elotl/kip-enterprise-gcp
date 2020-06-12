@@ -21,7 +21,7 @@ spec:
         effect: NoSchedule
         operator: Exists
       containers:
-      - image: ${imageImageCacheController}
+      - image: gcr.io/elotl-kip/image-cache-controller:latest
         imagePullPolicy: IfNotPresent
         name: image-cache-controller
         env:
