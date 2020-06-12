@@ -390,6 +390,9 @@ required:
 - imageImageCacheController
 - imageUbbagent
 - kipProviderReplicas
+- kipStorageClass
+- kipStorageSize
+- imageCacheControllerReplicas
 - nfsVolumeEndpoint
 - reportingSecret
 #form:
