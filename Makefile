@@ -10,6 +10,7 @@ include var.Makefile
 
 REPORTING_SECRET ?= gs://cloud-marketplace-tools/reporting_secrets/fake_reporting_secret.yaml
 APP_DEPLOYER_IMAGE ?= $(REGISTRY)/deployer:$(TAG)
+IMAGE_CACHE_CONTROLLER_REPLICAS ?= 0
 APP_PARAMETERS ?= { \
   "name": "$(NAME)", \
   "namespace": "$(NAMESPACE)", \
@@ -18,13 +19,12 @@ APP_PARAMETERS ?= { \
   "imageKubeProxy": "$(REGISTRY)/kube-proxy:$(TAG)", \
   "imageUbbagent": "$(REGISTRY)/ubbagent:$(TAG)", \
   "reportingSecret": "$(REPORTING_SECRET)", \
-  "nfsVolumeEndpoint": "$(NFS_VOLUME_ENDPOINT)" \
+  "nfsVolumeEndpoint": "$(NFS_VOLUME_ENDPOINT)", \
+  "imageCacheControllerReplicas": $(IMAGE_CACHE_CONTROLLER_REPLICAS) \
 }
 TESTER_IMAGE ?= elotl/debug:latest
-IMAGE_CACHE_CONTROLLER_REPLICAS ?= 0
 APP_TEST_PARAMETERS ?= { \
-  "imageTester": "$(TESTER_IMAGE)", \
-  "imageCacheControllerReplicas": $(IMAGE_CACHE_CONTROLLER_REPLICAS) \
+  "imageTester": "$(TESTER_IMAGE)" \
 }
 APP_EXTRA_OPTIONS ?= ""
 
