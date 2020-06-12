@@ -127,18 +127,14 @@ To restore a backup, [create a disk from the snapshot](https://cloud.google.com/
 
 # Upgrades
 
-Set your kubectl context to point to the namespace in which you installed Kip:
-
-    kubectl config set-context --current --namespace=<namespace>
-
 Set the new image version in an environment variable:
 
-    export NEW_VERSION=1.2.3  # Choose the version you want to upgrade to.
-    export IMAGE_KIP_PROVIDER="gcr.io/cloud-marketplace/elotl/kip:$NEW_VERSION"
+    $ export NEW_VERSION=v0.1.0  # Choose the version you want to upgrade to.
+    $ export IMAGE_KIP_PROVIDER="gcr.io/cloud-marketplace/elotl/kip:$NEW_VERSION"
 
 Update the Deployment definition with the reference to the new image:
 
-    kubectl patch statefulset <kip-statefulset-name> \
+    $ kubectl patch -n $NAMESPACE statefulset <kip-statefulset-name> \
       --type='json' \
       --patch="[{ \
           \"op\": \"replace\", \
@@ -148,7 +144,7 @@ Update the Deployment definition with the reference to the new image:
 
 You can monitor the progress via:
 
-    kubectl get pods \
+    $ kubectl get -n $NAMESPACE pods \
       -l "app=kip-provider" \
       --output go-template='Status={{.status.phase}} Image={{(index .spec.containers 0).image}}' \
       --watch
