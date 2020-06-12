@@ -21,8 +21,10 @@ APP_PARAMETERS ?= { \
   "nfsVolumeEndpoint": "$(NFS_VOLUME_ENDPOINT)" \
 }
 TESTER_IMAGE ?= elotl/debug:latest
+IMAGE_CACHE_CONTROLLER_REPLICAS ?= 0
 APP_TEST_PARAMETERS ?= { \
-  "imageTester": "$(TESTER_IMAGE)" \
+  "imageTester": "$(TESTER_IMAGE)", \
+  "imageCacheControllerReplicas": $(IMAGE_CACHE_CONTROLLER_REPLICAS) \
 }
 APP_EXTRA_OPTIONS ?= ""
 
