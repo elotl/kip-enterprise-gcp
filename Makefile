@@ -1,3 +1,4 @@
+# Base repo and the tag to build and push.
 REGISTRY ?= gcr.io/elotl-public/kip-enterprise
 TAG ?= latest
 
