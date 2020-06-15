@@ -5,7 +5,7 @@ etcd:
   internal:
     dataDir: /opt/kip/data
 cells:
-  privateIPOnly: true
+  privateIPOnly: ${kipPrivateIPOnly}
   bootImageSpec:
     project: elotl-kip
     image: elotl-kip-latest
