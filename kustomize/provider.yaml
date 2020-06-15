@@ -17,7 +17,7 @@ cells:
     version: latest
   extraCIDRs: []
   cellConfig:
-    imageCacheEndpoint: 10.120.0.2:/data
+    imageCacheEndpoint: ${nfsVolumeEndpoint}
 kubelet:
   capacity:
     cpu: "100"
