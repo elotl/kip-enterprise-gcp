@@ -1,3 +1,4 @@
+REGISTRY ?= gcr.io/elotl-public/kip-enterprise
 TAG ?= latest
 ELOTL_KIP_TAG ?= v0.0.6
 ELOTL_INIT_CERT_TAG ?= latest
