@@ -30,9 +30,9 @@ Follow these instructions to install Kip from the command line.
 - make
 - kubectl >= 1.14, configured to access the GKE cluster
 
-If you want to enable image caching, you also need a File Storage or NFS server
-in your network. Image caching will increase pod start up times, especially if
-the images used by your pods are large.
+If you want to enable image caching, you also need a Filestore or NFS server in
+your network. Image caching will increase pod start up times, especially if the
+images used by your pods are large.
 
 ### Install from the command line
 
@@ -61,6 +61,10 @@ credentials file is `~/.gcp-elotl-public-gcr-pull.json`:
     $ kubectl create -n $NAMESPACE secret docker-registry gcr-pull --docker-server=gcr.io --docker-username=_json_key --docker-password="$(cat ~/.gcp-elotl-public-gcr-pull.json)" --docker-email=info@elotl.co
     $ kubectl patch -n $NAMESPACE serviceaccount default -p '{"imagePullSecrets": [{"name": "gcr-pull"}]}'
 
+Make sure the application CRD is applied:
+
+    $ kubectl apply -f https://raw.githubusercontent.com/GoogleCloudPlatform/marketplace-k8s-app-tools/master/crd/app-crd.yaml
+
 Install the application:
 
     $ make app/install
@@ -80,7 +84,7 @@ To remove everything, first make sure you have terminated all [cells](https://gi
 
 ### Enable image caching
 
-You need a File Storage endpoint or NFS server in your network, that exports a
+You need a Filestore endpoint or NFS server in your network, that exports a
 writable volume.
 
 First, go through the steps up until `make app/install` from the [Install from

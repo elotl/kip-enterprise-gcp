@@ -103,8 +103,8 @@ properties:
   nfsVolumeEndpoint:
     type: string
     default: ""
-    title: File Storage or NFS volume endpoint
-    description: A File Storage volume endpoint that will be used for caching container images for Kip cells. For example, '10.120.0.20:/data'. Leave it empty if you disabled image caching.
+    title: Filestore or NFS volume endpoint
+    description: "A Filestore or NFS volume endpoint that will be used for caching container images for Kip cells. Example: '10.120.0.20:/data'. Leave it empty if you disabled image caching. See https://cloud.google.com/filestore for more information."
   imageCacheControllerServiceAccountName:
     type: string
     title: Service account used by Kip
