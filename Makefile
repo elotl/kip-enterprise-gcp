@@ -9,6 +9,10 @@ ELOTL_IMAGE_CACHE_CONTROLLER_TAG ?= v0.0.4
 KUBE_PROXY_TAG ?= v1.18.3
 UBB_AGENT_TAG ?= latest
 
+# Defaults for testing.
+NAME ?= elotl
+NAMESPACE ?= kip
+
 include gcloud.Makefile
 include var.Makefile
 
