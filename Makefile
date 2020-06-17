@@ -107,8 +107,8 @@ app/build:: .build/kip/deployer \
                            .build/var/TAG \
                            | .build/kip
 	$(call print_target, $@)
-	docker pull gcr.io/elotl-kip/kip-ubbagent:$(UBB_AGENT_TAG)
-	docker tag gcr.io/elotl-kip/kip-ubbagent:$(UBB_AGENT_TAG) \
+	docker pull gcr.io/elotl-kip/kip-ubbagent:$(ELOTL_KIP_UBBAGENT_TAG)
+	docker tag gcr.io/elotl-kip/kip-ubbagent:$(ELOTL_KIP_UBBAGENT_TAG) \
 		"$(REGISTRY)/ubbagent:$(TAG)"
 	docker push "$(REGISTRY)/ubbagent:$(TAG)"
 	@touch "$@"
