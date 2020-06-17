@@ -1,6 +1,6 @@
 # Base repo and the tag to build and push.
 REGISTRY ?= gcr.io/elotl-public/kip-enterprise
-TAG ?= latest
+TAG ?= $(shell git describe --dirty)
 
 # Tags for source images.
 ELOTL_KIP_TAG ?= v0.0.7
