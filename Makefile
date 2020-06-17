@@ -3,9 +3,9 @@ REGISTRY ?= gcr.io/elotl-public/kip-enterprise
 TAG ?= latest
 
 # Tags for source images.
-ELOTL_KIP_TAG ?= v0.0.6
-ELOTL_INIT_CERT_TAG ?= latest
-ELOTL_IMAGE_CACHE_CONTROLLER_TAG ?= v0.0.4
+ELOTL_KIP_TAG ?= v0.0.7
+ELOTL_INIT_CERT_TAG ?= v0.0.7
+ELOTL_IMAGE_CACHE_CONTROLLER_TAG ?= v0.0.5
 ELOTL_KIP_UBBAGENT_TAG ?= v0.0.3
 KUBE_PROXY_TAG ?= v1.18.3
 
