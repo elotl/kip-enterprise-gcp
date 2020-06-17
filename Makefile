@@ -6,8 +6,8 @@ TAG ?= latest
 ELOTL_KIP_TAG ?= v0.0.6
 ELOTL_INIT_CERT_TAG ?= latest
 ELOTL_IMAGE_CACHE_CONTROLLER_TAG ?= v0.0.4
+ELOTL_KIP_UBBAGENT_TAG ?= v0.0.3
 KUBE_PROXY_TAG ?= v1.18.3
-UBB_AGENT_TAG ?= latest
 
 # Defaults for testing.
 NAME ?= elotl
@@ -107,8 +107,8 @@ app/build:: .build/kip/deployer \
                            .build/var/TAG \
                            | .build/kip
 	$(call print_target, $@)
-	docker pull gcr.io/cloud-marketplace-tools/metering/ubbagent:$(UBB_AGENT_TAG)
-	docker tag gcr.io/cloud-marketplace-tools/metering/ubbagent:$(UBB_AGENT_TAG) \
+	docker pull gcr.io/elotl-kip/kip-ubbagent:$(UBB_AGENT_TAG)
+	docker tag gcr.io/elotl-kip/kip-ubbagent:$(UBB_AGENT_TAG) \
 		"$(REGISTRY)/ubbagent:$(TAG)"
 	docker push "$(REGISTRY)/ubbagent:$(TAG)"
 	@touch "$@"
