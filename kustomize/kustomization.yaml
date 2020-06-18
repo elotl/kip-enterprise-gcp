@@ -46,6 +46,3 @@ configMapGenerator:
   files:
   - provider.yaml
   behavior: merge
-- name: ubbagent-config
-  files:
-  - ubbagent-config.yaml

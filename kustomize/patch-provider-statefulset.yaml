@@ -18,10 +18,6 @@
     name: ubbagent
     image: elotl/ubbagent
     env:
-    - name: AGENT_CONFIG_FILE
-      value: "/etc/ubbagent/config.yaml"
-    - name: AGENT_LOCAL_PORT
-      value: "4567"
     - name: AGENT_ENCODED_KEY
       valueFrom:
         secretKeyRef:
@@ -32,18 +28,6 @@
         secretKeyRef:
           name: ${reportingSecret}
           key: consumer-id
-    volumeMounts:
-    - name: ubbagent-config
-      mountPath: /etc/ubbagent
-- op: add
-  path: /spec/template/spec/volumes/-
-  value:
-    name: ubbagent-config
-    configMap:
-      name: ubbagent-config
-      items:
-      - key: ubbagent-config.yaml
-        path: config.yaml
 - op: replace
   path: /spec/template/spec/serviceAccountName
   value: ${kipServiceAccountName}
