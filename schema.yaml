@@ -110,24 +110,6 @@ properties:
     default: ""
     title: Filestore or NFS volume endpoint
     description: "A Filestore or NFS volume endpoint that will be used for caching container images for Kip cells. Example: '10.120.0.20:/data'. Leave it empty if you disabled image caching. See https://cloud.google.com/filestore for more information."
-  imageCacheControllerServiceAccountName:
-    type: string
-    title: Service account used by Kip
-    x-google-marketplace:
-      type: SERVICE_ACCOUNT
-      serviceAccount:
-        roles:
-        - type: ClusterRole
-          rulesType: CUSTOM
-          rules:
-          - apiGroups:
-            - ""
-            resources:
-              - "pods"
-            verbs:
-              - "get"
-              - "watch"
-              - "list"
   kipServiceAccountName:
     type: string
     title: Service account used by Kip
@@ -347,6 +329,24 @@ properties:
                 - deletecollection
                 - patch
                 - update
+  imageCacheControllerServiceAccountName:
+    type: string
+    title: Service account used by Image Cache
+    x-google-marketplace:
+      type: SERVICE_ACCOUNT
+      serviceAccount:
+        roles:
+        - type: ClusterRole
+          rulesType: CUSTOM
+          rules:
+          - apiGroups:
+            - ""
+            resources:
+              - "pods"
+            verbs:
+              - "get"
+              - "watch"
+              - "list"
   kipNetworkAgentServiceAccountName:
     type: string
     title: Service account used by Kip Network Agent
