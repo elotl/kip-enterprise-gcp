@@ -104,6 +104,7 @@ properties:
     default: 1
     minimum: 0
     maximum: 1
+    title: Number of image cache controller replicas to start
     description: Number of replicas to start for the image cache controller. Set it to 1 to enable image caching, and 0 to disable it.
   nfsVolumeEndpoint:
     type: string
