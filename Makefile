@@ -3,11 +3,11 @@ REGISTRY ?= gcr.io/elotl-public/kip-enterprise
 TAG ?= $(shell git describe --dirty)
 
 # Tags for source images.
-ELOTL_KIP_TAG ?= v0.0.7
-ELOTL_INIT_CERT_TAG ?= v0.0.7
-ELOTL_IMAGE_CACHE_CONTROLLER_TAG ?= v0.0.7
+ELOTL_KIP_TAG ?= v0.0.9
+ELOTL_INIT_CERT_TAG ?= v0.0.9
+ELOTL_IMAGE_CACHE_CONTROLLER_TAG ?= v0.0.8
 ELOTL_KIP_UBBAGENT_TAG ?= v0.0.3
-KUBE_PROXY_TAG ?= v1.18.3
+KUBE_PROXY_TAG ?= v1.18.5
 
 # Defaults for testing.
 NAME ?= elotl
