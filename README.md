@@ -32,7 +32,7 @@ Follow these instructions to install Kip from the command line.
 - kubectl >= 1.14, configured to access the GKE cluster
 
 If you want to enable image caching, you also need a Filestore or NFS server in
-your network. Image caching will increase pod start up times, especially if the
+your network. Image caching will decrease pod start up times, especially if the
 images used by your pods are large.
 
 ### Install from the command line
