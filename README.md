@@ -18,7 +18,8 @@ in lower cloud costs, improved security and simpler operational overhead.
 ## Quick install with Google Cloud Marketplace
 
 You can install Kip to a Google Kubernetes Engine cluster using Google Cloud
-Marketplace. Follow the on-screen instructions: [TODO: fix link](https://console.cloud.google.com/marketplace/details/elotl/kip-enterprise).
+Marketplace. Follow the on-screen instructions on the [Kip Enterprise marketplace
+page](https://console.cloud.google.com/marketplace/details/elotl-public/kip-enterprise).
 
 ## Command line instructions
 
@@ -40,7 +41,7 @@ Set environment variables (modify if necessary):
 
     $ export NAME=elotl
     $ export NAMESPACE=kip-test
-    $ export MARKETPLACE_TOOLS_TAG=latest
+    $ export MARKETPLACE_TOOLS_TAG=0.10.3
     $ export REGISTRY=gcr.io/elotl-public/kip
     $ export TAG=v0.1.0 # Change this to the version you want to install
 

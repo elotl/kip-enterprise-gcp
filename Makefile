@@ -6,7 +6,7 @@ TAG ?= $(shell git describe --dirty)
 ELOTL_KIP_TAG ?= v0.0.7
 ELOTL_INIT_CERT_TAG ?= v0.0.7
 ELOTL_IMAGE_CACHE_CONTROLLER_TAG ?= v0.0.7
-ELOTL_KIP_UBBAGENT_TAG ?= v0.0.3
+ELOTL_KIP_UBBAGENT_TAG ?= v0.0.4
 KUBE_PROXY_TAG ?= v1.18.3
 
 # Defaults for testing.
