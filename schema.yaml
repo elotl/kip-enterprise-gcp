@@ -399,7 +399,6 @@ required:
 - kipStorageClass
 - kipStorageSize
 - imageCacheControllerReplicas
-- nfsVolumeEndpoint
 - reportingSecret
 #form:
 #- widget: help
