@@ -43,7 +43,7 @@ Set environment variables (modify if necessary):
     $ export NAMESPACE=kip-test
     $ export MARKETPLACE_TOOLS_TAG=0.10.3
     $ export REGISTRY=gcr.io/elotl-public/kip
-    $ export TAG=v0.1.0 # Change this to the version you want to install
+    $ export TAG=1.0 # Change this to the version you want to install
 
 If your kubeconfig file is in a non-standard location:
 
@@ -76,7 +76,7 @@ This will install Kip, which will create a new virtual node:
     NAME                                        STATUS   ROLES    AGE    VERSION
     elotl-kip-provider-0                        Ready    agent    57s
     gke-elotl-node-pool-elotl-8bc14dfd-cxhc     Ready    <none>   2d1h   v1.14.10-gke.36
-    
+
 ### Uninstall
 
 To remove everything, first make sure you have terminated all [cells](https://github.com/elotl/kip/blob/master/docs/cells.md) started by Kip. Then simply:
@@ -134,7 +134,7 @@ To restore a backup, [create a disk from the snapshot](https://cloud.google.com/
 
 Set the new image version in an environment variable:
 
-    $ export NEW_VERSION=v0.1.0  # Choose the version you want to upgrade to.
+    $ export NEW_VERSION=v1.0.0  # Choose the version you want to upgrade to.
     $ export IMAGE_KIP_PROVIDER="gcr.io/cloud-marketplace/elotl/kip:$NEW_VERSION"
 
 Update the Deployment definition with the reference to the new image:
